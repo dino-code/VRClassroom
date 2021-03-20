@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data.OleDb;
+using Amazon;
 
 using UnityEngine;
 using UnityEngine.UI;
