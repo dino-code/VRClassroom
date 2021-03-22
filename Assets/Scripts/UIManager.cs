@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
         form.AddField("password", "Dino-NewTest");
         form.AddField("status", "Dino-NewTest");
 
-        UnityWebRequest www = UnityWebRequest.Post("http://127.0.01:5000/addEntry", form);
+        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:5000/addEntry", form);
         www.SendWebRequest();
         Debug.Log("Success");
 
