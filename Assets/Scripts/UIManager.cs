@@ -37,6 +37,17 @@ public class UIManager : MonoBehaviour
         startScreen.SetActive(true);
         createAccountScreen.SetActive(false);
 
+        WWWForm form = new WWWForm();
+        form.AddField("firstName", "Dino-NewTest");
+        form.AddField("lastName", "Dino-NewTest");
+        form.AddField("email", "Dino-NewTest");
+        form.AddField("password", "Dino-NewTest");
+        form.AddField("status", "Dino-NewTest");
+
+        UnityWebRequest www = UnityWebRequest.Post("http://127.0.01:5000/addEntry", form);
+        www.SendWebRequest();
+        Debug.Log("Success");
+
     }
 
     public void ShowCreateAccountScreen()
