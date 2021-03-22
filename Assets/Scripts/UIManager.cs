@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
         startScreen.SetActive(true);
         createAccountScreen.SetActive(false);
 
+        Debug.Log("Test");
         WWWForm form = new WWWForm();
         form.AddField("firstName", "Dino-NewTest");
         form.AddField("lastName", "Dino-NewTest");
