@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
 
         Debug.Log("Status" + participant.validateNewAccount());
         /*
+        Debug.Log("Test");
         WWWForm form = new WWWForm();
         form.AddField("firstName", "Dino-NewTest");
         form.AddField("lastName", "Dino-NewTest");
