@@ -6,12 +6,15 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
 
+using VRClassroom;
+
 public class UIManager : MonoBehaviour
 {
     private GameObject startScreen;
     private GameObject createAccountScreen;
     private Button createAccountSubmitButton;
 
+    /*
     #region FormData_class
     public struct FormData
     {
@@ -23,9 +26,11 @@ public class UIManager : MonoBehaviour
         
     }
     #endregion
+    */
     // Start is called before the first frame update
     void Start()
     {
+        /*
         // Screens
         startScreen = GameObject.Find("welcome_screen");
         createAccountScreen = GameObject.Find("create_acc_screen");
@@ -36,7 +41,14 @@ public class UIManager : MonoBehaviour
         // Show/Hide screens
         startScreen.SetActive(true);
         createAccountScreen.SetActive(false);
+        */
 
+        Debug.Log("LOOK HERE AJD;LKFJASD;LFKJDSAGKJAOIGJAOWGJOSDGJAOGPJ");
+
+        Participant participant = new Participant("Dino", "Becaj", "dbecaj@fordham.edu", "lalala123", "Student");
+
+        Debug.Log("Status" + participant.validateNewAccount());
+        /*
         Debug.Log("Test");
         WWWForm form = new WWWForm();
         form.AddField("firstName", "Dino-NewTest");
@@ -48,6 +60,9 @@ public class UIManager : MonoBehaviour
         UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:5000/addEntry", form);
         www.SendWebRequest();
         Debug.Log("Success");
+        */
+
+
 
     }
 
@@ -62,8 +77,10 @@ public class UIManager : MonoBehaviour
         Debug.Log("Submit Clicked");
 
         // Extract fields from the UI
+        /*
         FormData data = new FormData();
         data = GetDataFromUI();
+        */
 
         // Need to call a function here that verifies whether the input is valid.
         // Check against database to see whether these credentials have been used before. If they have, show an error.
@@ -79,7 +96,7 @@ public class UIManager : MonoBehaviour
         string connString = "Host=database-2.cxulhfpnprky.us-east-1.rds.amazonaws.com:5342;Username=postgres;Password=Finance123!;Database=database-2";
         using var conn = new NpgsqlConnection(connString);
         */
-
+        /*
         string url = "http://127.0.01:5000/addEntry";
         string method = "POST";
 
@@ -93,6 +110,7 @@ public class UIManager : MonoBehaviour
         UnityWebRequest www = UnityWebRequest.Post(url, form);
         www.SendWebRequest();
         Debug.Log("Success");
+        */
 
         //string jsonString = JsonSerializer.Serialize(data);
 
@@ -100,7 +118,7 @@ public class UIManager : MonoBehaviour
 
         //UnityWebRequest req = new UnityWebRequest(url, method, );
     }
-
+    /*
     private FormData GetDataFromUI()
     {
         FormData data = new FormData();
@@ -113,6 +131,7 @@ public class UIManager : MonoBehaviour
 
         return data;
     }
+    */
 
     private List<GameObject> FindAllChildrenWithTag(Transform parent, string tag)
     {
