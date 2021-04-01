@@ -132,8 +132,8 @@ public class UIManager : MonoBehaviour
         participant.SetFirstName(GameObject.Find("FirstName").GetComponent<TMP_InputField>().text);
         participant.SetLastName(GameObject.Find("LastName").GetComponent<TMP_InputField>().text);
         participant.SetEmail(GameObject.Find("Email").GetComponent<TMP_InputField>().text);
-        participant.SetPassword(GameObject.Find("Status").GetComponent<TMP_Dropdown>().itemText.text);
-        participant.SetStatus(GameObject.Find("Password").GetComponent<TMP_InputField>().text);
+        participant.SetPassword(GameObject.Find("Password").GetComponent<TMP_Dropdown>().itemText.text);
+        participant.SetStatus(GameObject.Find("Status").GetComponent<TMP_InputField>().text);
 
         return participant;
     }

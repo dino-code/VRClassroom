@@ -22,7 +22,7 @@ public class KeyboardManager : MonoBehaviour
 
     public void ShowKeyboard()
     {
-        overlayKeyboard = TouchScreenKeyboard.Open("t", TouchScreenKeyboardType.Default);
+        overlayKeyboard = TouchScreenKeyboard.Open("t ", TouchScreenKeyboardType.Default);
         
         if (overlayKeyboard != null)
         {
