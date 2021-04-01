@@ -1,4 +1,4 @@
-﻿using VRClassroom;
+﻿//using VRClassroom;
 
 namespace VRClassroom
 {
@@ -10,7 +10,7 @@ namespace VRClassroom
         private string status;
         private string password;
 
-        public Participant(string firstName, string lastName, string email, string password, string status)
+        public Participant(string firstName = "default", string lastName = "default", string email = "default", string password = "default", string status = "default")
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -26,6 +26,13 @@ namespace VRClassroom
             return credentials.CheckNewCredentials(this);
         }
 
+        public void createUserAccount()
+        {
+            DatabaseManager db = new DatabaseManager();
+            db.AddParticipantToDatabase(this);
+        }
+
+        #region getters
         public string GetFirstName()
         {
             return firstName;
@@ -50,5 +57,33 @@ namespace VRClassroom
         {
             return password;
         }
+        #endregion
+
+        #region setters
+        public void SetFirstName(string value)
+        {
+            firstName = value;
+        }
+
+        public void SetLastName(string value)
+        {
+            lastName = value;
+        }
+
+        public void SetEmail(string value)
+        {
+            email = value;
+        }
+
+        public void SetStatus(string value)
+        {
+            status = value;
+        }
+
+        public void SetPassword(string value)
+        {
+            password = value;
+        }
+        #endregion
     }
 }

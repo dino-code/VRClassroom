@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*
+        
         // Screens
         startScreen = GameObject.Find("welcome_screen");
         createAccountScreen = GameObject.Find("create_acc_screen");
@@ -41,13 +41,14 @@ public class UIManager : MonoBehaviour
         // Show/Hide screens
         startScreen.SetActive(true);
         createAccountScreen.SetActive(false);
-        */
-
+        
+        /*
         Debug.Log("LOOK HERE AJD;LKFJASD;LFKJDSAGKJAOIGJAOWGJOSDGJAOGPJ");
 
         Participant participant = new Participant("Dino", "Becaj", "dbecaj@fordham.edu", "lalala123", "Student");
 
         Debug.Log("Status" + participant.validateNewAccount());
+        */
         /*
         Debug.Log("Test");
         WWWForm form = new WWWForm();
@@ -72,9 +73,16 @@ public class UIManager : MonoBehaviour
         createAccountScreen.SetActive(true);
     }
 
-    public void OnSubmitClick()
+    public void OnCreateAccountSubmitClick()
     {
         Debug.Log("Submit Clicked");
+
+        Participant participant = new Participant();
+
+        participant = CreateParticipantFromInputFields(participant);
+        participant.createUserAccount();
+
+        //participant.validateNewAccount();
 
         // Extract fields from the UI
         /*
@@ -118,20 +126,18 @@ public class UIManager : MonoBehaviour
 
         //UnityWebRequest req = new UnityWebRequest(url, method, );
     }
-    /*
-    private FormData GetDataFromUI()
+    
+    private Participant CreateParticipantFromInputFields(Participant participant)
     {
-        FormData data = new FormData();
+        participant.SetFirstName(GameObject.Find("FirstName").GetComponent<TMP_InputField>().text);
+        participant.SetLastName(GameObject.Find("LastName").GetComponent<TMP_InputField>().text);
+        participant.SetEmail(GameObject.Find("Email").GetComponent<TMP_InputField>().text);
+        participant.SetPassword(GameObject.Find("Status").GetComponent<TMP_Dropdown>().itemText.text);
+        participant.SetStatus(GameObject.Find("Password").GetComponent<TMP_InputField>().text);
 
-        data.firstName = GameObject.Find("FirstName").GetComponent<TMP_InputField>().text;
-        data.lastName = GameObject.Find("LastName").GetComponent<TMP_InputField>().text;
-        data.emailAddress = GameObject.Find("Email").GetComponent<TMP_InputField>().text;
-        data.status = GameObject.Find("Status").GetComponent<TMP_Dropdown>().itemText.text;
-        data.password = GameObject.Find("Password").GetComponent<TMP_InputField>().text;
-
-        return data;
+        return participant;
     }
-    */
+    
 
     private List<GameObject> FindAllChildrenWithTag(Transform parent, string tag)
     {
