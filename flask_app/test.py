@@ -3,6 +3,10 @@ from psycopg2 import connect
 
 app = Flask(__name__)
 
+@app.route('/')
+def main():
+    return 'Welcome'
+
 # This route is taken when an entry is to be added
 @app.route('/addEntry', methods=['POST', 'GET'])
 def add_entry():
