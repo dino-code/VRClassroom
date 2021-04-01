@@ -17,7 +17,7 @@ namespace VRClassroom
             WWWForm form = new WWWForm();
             form = ParticipantToForm(participant, form);
 
-            UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:5000/addEntry", form);
+            UnityWebRequest www = UnityWebRequest.Post("http://vrclass-env.eba-24xji93n.us-east-1.elasticbeanstalk.com/addEntry", form);
             www.SendWebRequest();
 
             return true;
