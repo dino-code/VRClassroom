@@ -1,14 +1,14 @@
 from flask import Flask, request
 from psycopg2 import connect
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route('/')
+@application.route('/')
 def main():
     return 'Welcome'
 
 # This route is taken when an entry is to be added
-@app.route('/addEntry', methods=['POST', 'GET'])
+@application.route('/addEntry', methods=['POST', 'GET'])
 def add_entry():
     if request.method == 'POST':
         # get a dict of the form passed from VRClassroom app: {'firstName': '', 'lastName': '', 'email': '', 'password': '', 'status': ''}
@@ -28,3 +28,9 @@ def add_entry():
         conn.close()
 
     return 'Complete'
+
+'''
+@application.route('/checkEntry', methods=['POST', 'GET'])
+def add_entry():
+    if request.method == 'POST':
+'''
