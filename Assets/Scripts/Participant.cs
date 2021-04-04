@@ -19,17 +19,48 @@ namespace VRClassroom
             this.status = status;
         }
 
-        public bool validateNewAccount()
+        public bool validateLoginCredentials()
         {
             DatabaseManager credentials = new DatabaseManager();
 
-            return credentials.CheckNewCredentials(this);
+            return credentials.CheckLoginCredentials(this);
         }
 
-        public void createUserAccount()
+        public bool InputsValid()
         {
-            DatabaseManager db = new DatabaseManager();
-            db.AddParticipantToDatabase(this);
+            // This method checks that email, password, firstname, and lastname have valid entries
+            if (this.GetFirstName().Length > 0 && this.GetLastName().Length > 0 && (this.GetEmail().Length > 0 && this.GetEmail().Contains("@")) && this.GetPassword().Length > 0) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CreateUserAccount()
+        {
+            // This method sends a request to create a new user account
+
+            if (this.InputsValid())
+            {
+                DatabaseManager db = new DatabaseManager();
+
+                // the database manager shoud be used to check if there is a participant in the database.
+                // This method will then return true if the participant was added and false if they weren't
+                // This can be a private method in AddParticipantToDatabase. AddParticipantToDatabase will
+                // Then return true or false depending on whether the validation occurred successfully
+                // and determined that there was not an existing entry.
+                if (db.AddParticipantToDatabase(this))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            
+
+            return true;
         }
 
         #region getters

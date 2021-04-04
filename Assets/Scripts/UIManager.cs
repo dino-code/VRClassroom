@@ -73,22 +73,48 @@ public class UIManager : MonoBehaviour
         createAccountScreen.SetActive(true);
     }
 
+    public void OnLoginSubmitClick()
+    {
+        // First we grab all the login inputs
+        string email;
+        string password;
+
+        GameObject[] loginInputs = GameObject.FindGameObjectsWithTag("LoginInput");
+
+        for (int i = 0; i < loginInputs.Length; i++)
+        {
+            if (loginInputs[i].gameObject.name == "Email")
+            {
+                email = loginInputs[i].GetComponent<TMP_InputField>().text;
+            }
+            if (loginInputs[i].gameObject.name == "Password")
+            {
+                password = loginInputs[i].GetComponent<TMP_InputField>().text;
+            }
+        }
+    }
+
     public void OnCreateAccountSubmitClick()
     {
         Debug.Log("Submit Clicked");
 
         Participant participant = new Participant();
 
-        participant = CreateParticipantFromInputFields(participant);
-        participant.createUserAccount();
+        GameObject[] createAccountInputs = GameObject.FindGameObjectsWithTag("CreateAccountInput");
 
-        //participant.validateNewAccount();
+        participant = CreateParticipantFromInputFields(participant, createAccountInputs);
 
-        // Extract fields from the UI
-        /*
-        FormData data = new FormData();
-        data = GetDataFromUI();
-        */
+        // validate that email and password fields are not empty
+        if (participant.InputsValid())
+        {
+
+        }
+        else
+        {
+            Debug.Log("Invalid Inputs");
+        }
+
+        participant.CreateUserAccount();
 
         // Need to call a function here that verifies whether the input is valid.
         // Check against database to see whether these credentials have been used before. If they have, show an error.
@@ -127,30 +153,32 @@ public class UIManager : MonoBehaviour
         //UnityWebRequest req = new UnityWebRequest(url, method, );
     }
     
-    private Participant CreateParticipantFromInputFields(Participant participant)
+    private Participant CreateParticipantFromInputFields(Participant participant, GameObject[] fields)
     {
-        participant.SetFirstName(GameObject.Find("FirstName").GetComponent<TMP_InputField>().text);
-        participant.SetLastName(GameObject.Find("LastName").GetComponent<TMP_InputField>().text);
-        participant.SetEmail(GameObject.Find("Email").GetComponent<TMP_InputField>().text);
-        participant.SetPassword(GameObject.Find("Password").GetComponent<TMP_Dropdown>().itemText.text);
-        participant.SetStatus(GameObject.Find("Status").GetComponent<TMP_InputField>().text);
-
-        return participant;
-    }
-    
-
-    private List<GameObject> FindAllChildrenWithTag(Transform parent, string tag)
-    {
-        List<GameObject> children = new List<GameObject>();
-
-        foreach (Transform child in parent)
+        for (int i = 0; i < fields.Length; i++)
         {
-            if (child.CompareTag(tag))
+            if (fields[i].gameObject.name == "FirstName")
             {
-                children.Add(child.gameObject);
+                participant.SetFirstName(fields[i].GetComponent<TMP_InputField>().text);
+            }
+            if (fields[i].gameObject.name == "LastName")
+            {
+                participant.SetLastName(fields[i].GetComponent<TMP_InputField>().text);
+            }
+            if (fields[i].gameObject.name == "Email")
+            {
+                participant.SetEmail(fields[i].GetComponent<TMP_InputField>().text);
+            }
+            if (fields[i].gameObject.name == "Password")
+            {
+                participant.SetPassword(fields[i].GetComponent<TMP_InputField>().text);
+            }
+            if (fields[i].gameObject.name == "Status")
+            {
+                participant.SetStatus(fields[i].GetComponent<TMP_InputField>().text);
             }
         }
 
-        return children;
+        return participant;
     }
 }
