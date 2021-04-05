@@ -14,19 +14,6 @@ public class UIManager : MonoBehaviour
     private GameObject createAccountScreen;
     private Button createAccountSubmitButton;
 
-    /*
-    #region FormData_class
-    public struct FormData
-    {
-        public string firstName;
-        public string lastName;
-        public string emailAddress;
-        public string status;
-        public string password;
-        
-    }
-    #endregion
-    */
     // Start is called before the first frame update
     void Start()
     {

@@ -21,14 +21,24 @@ namespace VRClassroom
 
         public bool validateLoginCredentials()
         {
-            DatabaseManager credentials = new DatabaseManager();
+            // This method calls upon the DatabaseManager class to validate whether valid credentials are present in the database.
+            // If credentials are present, a value of true is returned.
 
-            return credentials.CheckLoginCredentials(this);
+            if (InputsValid)
+            {
+                DatabaseManager credentials = new DatabaseManager();
+
+                return credentials.CheckLoginCredentials(this);
+            }
+
+            return false;
+            
         }
 
-        public bool InputsValid()
+        private bool InputsValid()
         {
-            // This method checks that email, password, firstname, and lastname have valid entries
+            // This method checks that email, password, firstname, and lastname all have valid entries. It is meant to be called before using the 
+            // DatabaseManager to connect to the databse (to prevent null entries from being added).
             if (this.GetFirstName().Length > 0 && this.GetLastName().Length > 0 && (this.GetEmail().Length > 0 && this.GetEmail().Contains("@")) && this.GetPassword().Length > 0) {
                 return true;
             }
