@@ -1,6 +1,4 @@
-﻿using VRClassroom;
-
-using UnityEngine.Networking;
+﻿using UnityEngine.Networking;
 using UnityEngine;
 
 namespace VRClassroom

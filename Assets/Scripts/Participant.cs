@@ -1,6 +1,4 @@
-﻿//using VRClassroom;
-
-namespace VRClassroom
+﻿namespace VRClassroom
 {
     public class Participant
     {
@@ -9,6 +7,7 @@ namespace VRClassroom
         private string email;
         private string status;
         private string password;
+        private DatabaseManager dbManager = new DatabaseManager();
 
         public Participant(string firstName = "default", string lastName = "default", string email = "default", string password = "default", string status = "default")
         {
@@ -19,12 +18,12 @@ namespace VRClassroom
             this.status = status;
         }
 
-        public bool validateLoginCredentials()
+        public bool ValidateLoginCredentials()
         {
             // This method calls upon the DatabaseManager class to validate whether valid credentials are present in the database.
             // If credentials are present, a value of true is returned.
 
-            if (InputsValid)
+            if (InputsValid())
             {
                 DatabaseManager credentials = new DatabaseManager();
 

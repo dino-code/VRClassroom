@@ -3,63 +3,58 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
 using TMPro;
 
 using VRClassroom;
 
 public class UIManager : MonoBehaviour
 {
+    // Screens
     private GameObject startScreen;
     private GameObject createAccountScreen;
+    private GameObject loginScreen;
+
+    // Buttons
     private Button createAccountSubmitButton;
+    private Button loginSubmitButton;
+
+    // Participant
+    private Participant participant;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        // Screens
+        // Screen Assignments
         startScreen = GameObject.Find("welcome_screen");
         createAccountScreen = GameObject.Find("create_acc_screen");
+        loginScreen = GameObject.Find("login_screen");
 
-        // Buttons
-        createAccountSubmitButton = GameObject.Find("Submit_Button").gameObject.GetComponent<Button>();
+        // Button Assignments
+        createAccountSubmitButton = GameObject.Find("Create_Account_Submit_Button").gameObject.GetComponent<Button>();
+        loginSubmitButton = GameObject.Find("Login_Submit_Button").gameObject.GetComponent<Button>();
 
-        // Show/Hide screens
+        // Show/Hide screens at start
         startScreen.SetActive(true);
         createAccountScreen.SetActive(false);
-        
-        /*
-        Debug.Log("LOOK HERE AJD;LKFJASD;LFKJDSAGKJAOIGJAOWGJOSDGJAOGPJ");
-
-        Participant participant = new Participant("Dino", "Becaj", "dbecaj@fordham.edu", "lalala123", "Student");
-
-        Debug.Log("Status" + participant.validateNewAccount());
-        */
-        /*
-        Debug.Log("Test");
-        WWWForm form = new WWWForm();
-        form.AddField("firstName", "Dino-NewTest");
-        form.AddField("lastName", "Dino-NewTest");
-        form.AddField("email", "Dino-NewTest");
-        form.AddField("password", "Dino-NewTest");
-        form.AddField("status", "Dino-NewTest");
-
-        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:5000/addEntry", form);
-        www.SendWebRequest();
-        Debug.Log("Success");
-        */
-
-
-
+        loginScreen.SetActive(false);
     }
 
+    #region ShowScreens
     public void ShowCreateAccountScreen()
     {
         startScreen.SetActive(false);
         createAccountScreen.SetActive(true);
     }
 
+    public void ShowLoginScreen()
+    {
+        startScreen.SetActive(false);
+        createAccountScreen.SetActive(false);
+        loginScreen.SetActive(true);
+    }
+    #endregion
+
+    #region ButtonClicks
     public void OnLoginSubmitClick()
     {
         // First we grab all the login inputs
@@ -139,7 +134,13 @@ public class UIManager : MonoBehaviour
 
         //UnityWebRequest req = new UnityWebRequest(url, method, );
     }
-    
+    #endregion
+
+    public void ShowErrorMessage()
+    {
+        // This method should cause an error message to appear based on the kind of error that occurs.
+        // Possible error types are (invalid email, password, etc).
+    }
     private Participant CreateParticipantFromInputFields(Participant participant, GameObject[] fields)
     {
         for (int i = 0; i < fields.Length; i++)
