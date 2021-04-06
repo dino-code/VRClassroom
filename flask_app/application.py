@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from psycopg2 import connect
 
 application = Flask(__name__)
@@ -8,8 +8,8 @@ def main():
     return 'Welcome'
 
 # This route is taken when an entry is to be added
-@application.route('/addEntry', methods=['POST', 'GET'])
-def add_entry():
+@application.route('/addNewUser', methods=['POST', 'GET'])
+def addNewUser():
     if request.method == 'POST':
         # get a dict of the form passed from VRClassroom app: {'firstName': '', 'lastName': '', 'email': '', 'password': '', 'status': ''}
         data = request.form.to_dict()
@@ -29,8 +29,25 @@ def add_entry():
 
     return 'Complete'
 
-'''
-@application.route('/checkEntry', methods=['POST', 'GET'])
-def add_entry():
-    if request.method == 'POST':
-'''
+@application.route('/checkForExistingEmail', methods=['POST', 'GET'])
+def checkForExistingEmail():
+    data = request.form.to_dict()
+        
+    # connect to aws database instance
+    conn = connect(host='database-2.cxulhfpnprky.us-east-1.rds.amazonaws.com', port='5432', user='postgres', password='Finance123!', dbname='myDatabase')
+    cur = conn.cursor()
+
+    cmd = '''SELECT * FROM Users WHERE email=%s'''
+    cur.execute(cmd, (data['email'],))
+
+    rows = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    if len(rows) > 0:
+        # the email exists in the db
+        return jsonify(result=True, id=id)
+    else:
+        # email does not exist
+        return jsonify(result=False, id=id)
