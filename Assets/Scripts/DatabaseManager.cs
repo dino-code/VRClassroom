@@ -1,10 +1,8 @@
 ﻿using UnityEngine.Networking;
 using UnityEngine;
 
-using System;
 using System.Net.Http;
-using System.IO;
-using System.Net;
+
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -18,7 +16,8 @@ namespace VRClassroom
             client = new HttpClient();
         }
 
-        static async Task<string> AddEntryTest(Participant participant)
+        #region RequestMethods
+        static async Task<string> AddEntryRequest(Participant participant)
         {
             var values = new Dictionary<string, string>
             {
@@ -52,25 +51,41 @@ namespace VRClassroom
             return responseString;
         }
 
+        /*
+        static async Task<string> CheckLoginCredentialsRequest(Participant participant)
+        {
+
+        }
+        */
+        #endregion
+
         public bool AddParticipantToDatabase(Participant participant)
         {
             // check first to see if the participant exists in the database (do this in a private method)
+            var response_one = CheckForExistingEmailRequest(participant);
+            if (response_one.Result == "email exists")
+            {
+                var response_two = AddEntryRequest(participant);
 
+                if (response_two.Result == "Complete")
+                {
+                    return true;
+                }
+            }
 
-           
+            return false;
+        }
 
-            WWWForm form = new WWWForm();
-            form = ParticipantToForm(participant, form);
+        public bool CheckForExistingEmail(Participant participant)
+        {
+            var response = CheckForExistingEmailRequest(participant);
 
-            UnityWebRequest www = UnityWebRequest.Post("http://vrclass-env.eba-24xji93n.us-east-1.elasticbeanstalk.com/addEntry", form);
-            www.SendWebRequest();
+            if (response.Result == "email exists")
+            {
+                return true;
+            }
 
-            
-
-            // Play around with System.Net
-
-
-            return true;
+            return false;
         }
 
         public bool CheckLoginCredentials(Participant participant)
@@ -114,12 +129,6 @@ namespace VRClassroom
             */
 
             return true;
-        }
-
-        
-        public bool CheckForExistingEmail(Participant participant)
-        {
-            
         }
 
         public WWWForm ParticipantToForm(Participant participant, WWWForm form)
