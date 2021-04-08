@@ -1,5 +1,6 @@
 ﻿using UnityEngine.Networking;
 using UnityEngine;
+using System.Net;
 
 namespace VRClassroom
 {
@@ -20,6 +21,9 @@ namespace VRClassroom
 
             UnityWebRequest www = UnityWebRequest.Post("http://vrclass-env.eba-24xji93n.us-east-1.elasticbeanstalk.com/addEntry", form);
             www.SendWebRequest();
+
+            // Play around with System.Net
+
 
             return true;
         }
