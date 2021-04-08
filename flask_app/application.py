@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from psycopg2 import connect
 
 application = Flask(__name__)
@@ -47,7 +47,7 @@ def checkForExistingEmail():
 
     if len(rows) > 0:
         # the email exists in the db
-        return jsonify(result=True, id=id)
+        return 'email exists'
     else:
         # email does not exist
-        return jsonify(result=False, id=id)
+        return 'email does not exist'
