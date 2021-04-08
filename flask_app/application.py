@@ -8,7 +8,7 @@ def main():
     return 'Welcome'
 
 # This route is taken when an entry is to be added
-@application.route('/addNewUser', methods=['POST', 'GET'])
+@application.route('/addNewUser', methods=['POST'])
 def addNewUser():
     if request.method == 'POST':
         # get a dict of the form passed from VRClassroom app: {'firstName': '', 'lastName': '', 'email': '', 'password': '', 'status': ''}
@@ -29,7 +29,7 @@ def addNewUser():
 
     return 'Complete'
 
-@application.route('/checkForExistingEmail', methods=['POST', 'GET'])
+@application.route('/checkForExistingEmail', methods=['GET'])
 def checkForExistingEmail():
     data = request.form.to_dict()
         

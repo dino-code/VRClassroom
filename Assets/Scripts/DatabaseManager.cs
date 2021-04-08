@@ -1,14 +1,55 @@
 ﻿using UnityEngine.Networking;
 using UnityEngine;
+
+using System;
+using System.Net.Http;
+using System.IO;
 using System.Net;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace VRClassroom
 {
     public class DatabaseManager
     {
-        public DatabaseManager()
+        private static readonly HttpClient client;
+        static DatabaseManager()
         {
-            
+            client = new HttpClient();
+        }
+
+        static async Task<string> AddEntryTest(Participant participant)
+        {
+            var values = new Dictionary<string, string>
+            {
+                { "firstName", participant.GetFirstName() },
+                { "lastName", participant.GetLastName() },
+                { "email", participant.GetEmail() },
+                { "password", participant.GetPassword() },
+                { "status", participant.GetStatus() }
+            };
+
+            var content = new FormUrlEncodedContent(values);
+            var response = await client.PostAsync("http://vrclass-env.eba-24xji93n.us-east-1.elasticbeanstalk.com/addNewUser", content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            return responseString;
+        }
+
+        static async Task<string> CheckForExistingEmailRequest(Participant participant)
+        {
+            var values = new Dictionary<string, string>
+            {
+                { "email", participant.GetEmail() }
+            };
+
+            var content = new FormUrlEncodedContent(values);
+            var response = await client.PostAsync("http://vrclass-env.eba-24xji93n.us-east-1.elasticbeanstalk.com/checkForExistingEmail", content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            return responseString;
         }
 
         public bool AddParticipantToDatabase(Participant participant)
@@ -16,11 +57,15 @@ namespace VRClassroom
             // check first to see if the participant exists in the database (do this in a private method)
 
 
+           
+
             WWWForm form = new WWWForm();
             form = ParticipantToForm(participant, form);
 
             UnityWebRequest www = UnityWebRequest.Post("http://vrclass-env.eba-24xji93n.us-east-1.elasticbeanstalk.com/addEntry", form);
             www.SendWebRequest();
+
+            
 
             // Play around with System.Net
 
@@ -31,7 +76,9 @@ namespace VRClassroom
         public bool CheckLoginCredentials(Participant participant)
         {
             UnityWebRequest request = new UnityWebRequest();
+
             
+
             //form = ParticipantToForm(participant, form);
             /*
             For any HTTP transaction, the normal code flow is:
@@ -67,6 +114,12 @@ namespace VRClassroom
             */
 
             return true;
+        }
+
+        
+        public bool CheckForExistingEmail(Participant participant)
+        {
+            
         }
 
         public WWWForm ParticipantToForm(Participant participant, WWWForm form)
