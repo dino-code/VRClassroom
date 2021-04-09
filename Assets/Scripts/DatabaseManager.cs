@@ -68,47 +68,30 @@ namespace VRClassroom
             return false;
         }
 
-        public bool CheckLoginCredentials(Participant participant)
+        public bool ValidateLoginCredentials(Participant participant)
         {
-            UnityWebRequest request = new UnityWebRequest();
+            var client = new RestClient("http://vrclass-env.eba-24xji93n.us-east-1.elasticbeanstalk.com");
 
-            
+            var request = new RestRequest("/validateLoginCredentials", Method.POST, DataFormat.Json);
 
-            //form = ParticipantToForm(participant, form);
-            /*
-            For any HTTP transaction, the normal code flow is:
+            //request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new
+            {
+                email = participant.GetEmail(),
+                password = participant.GetPassword()
+            });
 
-            Create a Web Request object
-            Configure the Web Request object
-            Set custom headers
-            Set HTTP verb(such as GET, POST, HEAD - custom verbs are permitted on all platforms except for Android)
-                            Set URL
-                            (Optional) Create an Upload Handler and attach it to the Web Request
-                            Provide data to be uploaded
-            Provide HTTP form to be uploaded
-            (Optional) Create a Download Handler and attach it to the Web Request
-            Send the Web Request
-            If inside a coroutine, you may Yield the result of the Send() call to wait for the request to complete
-            (Optional) Read received data from the Download Handler
-            (Optional) Read error information, HTTP status code and response headers from the UnityWebRequest object
-            *.
+            IRestResponse response = client.Execute(request);
+            var content = response.Content;
 
-            /*
-            WWWForm form = new WWWForm();
-            form.AddField("firstName", participant.GetFirstName());
-            form.AddField("lastName", participant.GetLastName());
-            form.AddField("email", participant.GetEmail());
-            form.AddField("password", participant.GetPassword());
-            form.AddField("status", participant.GetStatus());
+            Debug.Log(content);
 
-            UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:5000/checkNewEntry", form);
-            www.SendWebRequest();
+            if (content == "account exists")
+            {
+                return true;
+            }
 
-            // get response
-
-            */
-
-            return true;
+            return false;
         }
 
         public WWWForm ParticipantToForm(Participant participant, WWWForm form)

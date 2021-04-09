@@ -27,7 +27,7 @@
             {
                 DatabaseManager credentials = new DatabaseManager();
 
-                return credentials.CheckLoginCredentials(this);
+                return credentials.ValidateLoginCredentials(this);
             }
 
             return false;
