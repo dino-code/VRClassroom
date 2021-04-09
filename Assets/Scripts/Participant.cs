@@ -48,10 +48,12 @@
         public bool CreateUserAccount()
         {
             // This method sends a request to create a new user account
-
+            DatabaseManager db = new DatabaseManager();
+            db.AddParticipantToDatabase(this);
+            /*
             if (this.InputsValid())
             {
-                DatabaseManager db = new DatabaseManager();
+                
 
                 // the database manager shoud be used to check if there is a participant in the database.
                 // This method will then return true if the participant was added and false if they weren't
@@ -67,6 +69,7 @@
                     return false;
                 }
             }
+            */
             
 
             return true;

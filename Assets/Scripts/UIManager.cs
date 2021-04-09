@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
         startScreen.SetActive(true);
         createAccountScreen.SetActive(false);
         loginScreen.SetActive(false);
+
+        Debug.Log("Success");
     }
 
     #region ShowScreens
@@ -87,6 +89,7 @@ public class UIManager : MonoBehaviour
         participant = CreateParticipantFromInputFields(participant, createAccountInputs);
 
         // validate that email and password fields are not empty
+        /*
         if (participant.InputsValid())
         {
 
@@ -95,6 +98,7 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("Invalid Inputs");
         }
+        */
 
         participant.CreateUserAccount();
 
@@ -145,6 +149,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < fields.Length; i++)
         {
+            Debug.Log(fields[i].gameObject.name);
             if (fields[i].gameObject.name == "FirstName")
             {
                 participant.SetFirstName(fields[i].GetComponent<TMP_InputField>().text);
@@ -163,7 +168,11 @@ public class UIManager : MonoBehaviour
             }
             if (fields[i].gameObject.name == "Status")
             {
-                participant.SetStatus(fields[i].GetComponent<TMP_InputField>().text);
+                var sel = fields[i].GetComponent<TMP_Dropdown>();
+                int opt = sel.value;
+                var opts = sel.options;
+
+                participant.SetStatus(opts[opt].text);
             }
         }
 

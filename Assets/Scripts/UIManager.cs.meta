@@ -3,7 +3,12 @@ guid: 631e18e0d43877443a249e5dfc04f48e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - startScreen: {instanceID: 0}
+  - createAccountScreen: {instanceID: 0}
+  - loginScreen: {instanceID: 0}
+  - createAccountSubmitButton: {instanceID: 0}
+  - loginSubmitButton: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - CreateAccountInput
   - LoginInput
+  - create_acc_screen
+  - login_screen
+  - welcome_screen
   layers:
   - Default
   - TransparentFX

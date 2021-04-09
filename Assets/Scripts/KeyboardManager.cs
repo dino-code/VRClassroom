@@ -17,22 +17,16 @@ public class KeyboardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
+        overlayKeyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
 
-    public void ShowKeyboard()
-    {
-        overlayKeyboard = TouchScreenKeyboard.Open("t ", TouchScreenKeyboardType.Default);
-        
         if (overlayKeyboard != null)
         {
             inputText = overlayKeyboard.text;
         }
-        
     }
 
-    public void HideKeyboard()
+    public void ShowKeyboard()
     {
-        overlayKeyboard = null;
+        
     }
 }

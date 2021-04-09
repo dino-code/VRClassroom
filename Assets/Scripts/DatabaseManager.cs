@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
+using RestSharp;
+
 namespace VRClassroom
 {
     public class DatabaseManager
@@ -19,6 +21,7 @@ namespace VRClassroom
         #region RequestMethods
         static async Task<string> AddEntryRequest(Participant participant)
         {
+
             var values = new Dictionary<string, string>
             {
                 { "firstName", participant.GetFirstName() },
@@ -62,7 +65,33 @@ namespace VRClassroom
         public bool AddParticipantToDatabase(Participant participant)
         {
             // check first to see if the participant exists in the database (do this in a private method)
-            var response_one = CheckForExistingEmailRequest(participant);
+
+            var client = new RestClient("http://vrclass-env.eba-24xji93n.us-east-1.elasticbeanstalk.com");
+
+            var request = new RestRequest("/addNewUser/", Method.POST, DataFormat.Json);
+            
+            //request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new
+            {
+                firstName = participant.GetFirstName(),
+                lastName = participant.GetLastName(),
+                email = participant.GetEmail(),
+                password = participant.GetPassword(),
+                status = participant.GetStatus()
+            }) ;
+            
+            IRestResponse response = client.Execute(request);
+            var content = response.Content;
+
+            Debug.Log(content);
+
+            if (content == "Complete")
+                return true;
+
+            return false;
+
+            //var response_one = CheckForExistingEmailRequest(participant);
+            /*
             if (response_one.Result == "email exists")
             {
                 var response_two = AddEntryRequest(participant);
@@ -72,8 +101,7 @@ namespace VRClassroom
                     return true;
                 }
             }
-
-            return false;
+            */
         }
 
         public bool CheckForExistingEmail(Participant participant)
@@ -144,4 +172,3 @@ namespace VRClassroom
 
     } 
 }
-
