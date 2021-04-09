@@ -88,55 +88,12 @@ public class UIManager : MonoBehaviour
 
         participant = CreateParticipantFromInputFields(participant, createAccountInputs);
 
-        // validate that email and password fields are not empty
-        /*
-        if (participant.InputsValid())
-        {
-
-        }
-        else
-        {
-            Debug.Log("Invalid Inputs");
-        }
-        */
-
         participant.CreateUserAccount();
 
         // Need to call a function here that verifies whether the input is valid.
         // Check against database to see whether these credentials have been used before. If they have, show an error.
         // Check to see that all the fields are filled. If they are not, show an error.
-        /*
-        Debug.Log(data.firstName);
-        Debug.Log(data.lastName);
-        Debug.Log(data.emailAddress);
-        Debug.Log(data.password);
-        Debug.Log(data.status);
-        */
-        /*
-        string connString = "Host=database-2.cxulhfpnprky.us-east-1.rds.amazonaws.com:5342;Username=postgres;Password=Finance123!;Database=database-2";
-        using var conn = new NpgsqlConnection(connString);
-        */
-        /*
-        string url = "http://127.0.01:5000/addEntry";
-        string method = "POST";
-
-        WWWForm form = new WWWForm();
-        form.AddField("firstName", data.firstName);
-        form.AddField("lastName", data.lastName);
-        form.AddField("email", data.emailAddress);
-        form.AddField("password", data.password);
-        form.AddField("status", data.status);
-
-        UnityWebRequest www = UnityWebRequest.Post(url, form);
-        www.SendWebRequest();
-        Debug.Log("Success");
-        */
-
-        //string jsonString = JsonSerializer.Serialize(data);
-
-        //Debug.Log(jsonString);
-
-        //UnityWebRequest req = new UnityWebRequest(url, method, );
+        
     }
     #endregion
 
