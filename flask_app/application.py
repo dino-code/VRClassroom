@@ -12,7 +12,7 @@ def main():
 def addNewUser():
     if request.method == 'POST':
         # get a dict of the form passed from VRClassroom app: {'firstName': '', 'lastName': '', 'email': '', 'password': '', 'status': ''}
-        data = request.form.to_dict()
+        data = request.get_json()
         
         # connect to aws database instance
         conn = connect(host='database-2.cxulhfpnprky.us-east-1.rds.amazonaws.com', port='5432', user='postgres', password='Finance123!', dbname='myDatabase')
@@ -29,9 +29,9 @@ def addNewUser():
 
     return 'Complete'
 
-@application.route('/checkForExistingEmail', methods=['GET'])
+@application.route('/checkForExistingEmail', methods=['POST'])
 def checkForExistingEmail():
-    data = request.form.to_dict()
+    data = request.get_json()
         
     # connect to aws database instance
     conn = connect(host='database-2.cxulhfpnprky.us-east-1.rds.amazonaws.com', port='5432', user='postgres', password='Finance123!', dbname='myDatabase')
