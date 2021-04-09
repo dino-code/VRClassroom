@@ -51,3 +51,26 @@ def checkForExistingEmail():
     else:
         # email does not exist
         return 'email does not exist'
+
+@application.route('/validateLoginCredentials', methods=['POST'])
+def validateLoginCredentials():
+    data = request.get_json()
+        
+    # connect to aws database instance
+    conn = connect(host='database-2.cxulhfpnprky.us-east-1.rds.amazonaws.com', port='5432', user='postgres', password='Finance123!', dbname='myDatabase')
+    cur = conn.cursor()
+
+    cmd = '''SELECT * FROM Users WHERE email=%s and password=%s'''
+    cur.execute(cmd, (data['email'], data['password'],))
+
+    rows = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    if len(rows) > 0:
+        # the email exists in the db
+        return 'account exists'
+    else:
+        # email does not exist
+        return 'account does not exist'
