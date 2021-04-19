@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using Photon.Pun;
@@ -13,10 +10,34 @@ namespace VRClassroom
     {
         #region Photon Callbacks
 
-        /// <summary>
-        /// Called when the local player left the room. We need to load the launcher scene
-        /// </summary>
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            Debug.LogFormat("OnPlayerEnteredRoom() {0}", newPlayer.NickName); // not seen if you're the player
 
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+
+                LoadArena();
+            }
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            Debug.LogFormat("OnPlayerLeftRoom() {0}", otherPlayer.NickName); // seen when other disconnects
+
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
+
+                LoadArena();
+            }
+        }
+
+        /// <summary>
+        /// Called when the local player leaves the room. We need to load the launcher scene.
+        /// </summary>
         public override void OnLeftRoom()
         {
             SceneManager.LoadScene(0);
@@ -39,26 +60,14 @@ namespace VRClassroom
         {
             if (!PhotonNetwork.IsMasterClient)
             {
-                Debug.LogError("PhotonNetwork : Trying to load a level but we are not the master client.");
+                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
             }
-            Debug.LogFormat("PhotonNetwork : Loading level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
 
-            PhotonNetwork.LoadLevel("Room");
+            Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
+            PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
         }
 
         #endregion
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }
 
