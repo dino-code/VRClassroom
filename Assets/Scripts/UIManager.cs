@@ -85,6 +85,7 @@ public class UIManager : MonoBehaviour
 
     public void OnCreateAccountSubmitClick()
     {
+        bool validCreation = false;          // set to true on successful account creation.
         Debug.Log("Submit Clicked");
 
         Participant participant = new Participant();
@@ -99,7 +100,7 @@ public class UIManager : MonoBehaviour
         // Check against database to see whether these credentials have been used before. If they have, show an error.
         // Check to see that all the fields are filled. If they are not, show an error.
 
-        // If the accout created is valid, we connect to Photon's servers.
+        // If the account created is valid, we connect to Photon's servers.
         
     }
     #endregion

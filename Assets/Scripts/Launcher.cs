@@ -17,14 +17,7 @@ namespace VRClassroom
 
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so a new room will be created")]
         [SerializeField]
-        private byte maxPlayersPerRoom = 4;
-
-        [Tooltip("The UI Panel to let the user enter name, connect and play")]
-        [SerializeField]
-        private GameObject controlPanel;
-        [Tooltip("The UI Label to inform the user that the connection is in progress")]
-        [SerializeField]
-        private GameObject progressLabel;
+        private byte maxPlayersPerRoom = 30;
 
 
         #endregion
@@ -51,8 +44,6 @@ namespace VRClassroom
 
         public override void OnDisconnected(DisconnectCause cause)
         {
-            progressLabel.SetActive(false);
-            controlPanel.SetActive(true);
             Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
         }
 
@@ -87,16 +78,11 @@ namespace VRClassroom
         // Start is called before the first frame update
         void Start()
         {
-            progressLabel.SetActive(false);
-            controlPanel.SetActive(true);
+            Connect();
         }
 
         #endregion
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+       
         #region Public Methods
         /// <summary>
         /// Start the connection process.
@@ -105,13 +91,12 @@ namespace VRClassroom
         /// </summary>
         public void Connect()
         {
-            progressLabel.SetActive(true);
-            controlPanel.SetActive(false);
 
             if (PhotonNetwork.IsConnected)
             {
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-                PhotonNetwork.JoinRandomRoom();
+                //PhotonNetwork.JoinRandomRoom();
+                PhotonNetwork.JoinOrCreateRoom("Class", new RoomOptions(), TypedLobby.Default);
             }
             else
             {
