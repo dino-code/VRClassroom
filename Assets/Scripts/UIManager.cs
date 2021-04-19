@@ -10,12 +10,17 @@ using VRClassroom;
 public class UIManager : MonoBehaviour
 {
     // Screens
+    [SerializeField]
     private GameObject startScreen;
+    [SerializeField]
     private GameObject createAccountScreen;
+    [SerializeField]
     private GameObject loginScreen;
 
     // Buttons
+    [SerializeField]
     private Button createAccountSubmitButton;
+    [SerializeField]
     private Button loginSubmitButton;
 
     // Participant
@@ -25,13 +30,13 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         // Screen Assignments
-        startScreen = GameObject.Find("welcome_screen");
-        createAccountScreen = GameObject.Find("create_acc_screen");
-        loginScreen = GameObject.Find("login_screen");
+        //startScreen = GameObject.Find("welcome_screen");
+        //createAccountScreen = GameObject.Find("create_acc_screen");
+        //loginScreen = GameObject.Find("login_screen");
 
         // Button Assignments
-        createAccountSubmitButton = GameObject.Find("Create_Account_Submit_Button").gameObject.GetComponent<Button>();
-        loginSubmitButton = GameObject.Find("Login_Submit_Button").gameObject.GetComponent<Button>();
+        //createAccountSubmitButton = GameObject.Find("Create_Account_Submit_Button").gameObject.GetComponent<Button>();
+        //loginSubmitButton = GameObject.Find("Login_Submit_Button").gameObject.GetComponent<Button>();
 
         // Show/Hide screens at start
         startScreen.SetActive(true);
@@ -93,6 +98,8 @@ public class UIManager : MonoBehaviour
         // Need to call a function here that verifies whether the input is valid.
         // Check against database to see whether these credentials have been used before. If they have, show an error.
         // Check to see that all the fields are filled. If they are not, show an error.
+
+        // If the accout created is valid, we connect to Photon's servers.
         
     }
     #endregion
