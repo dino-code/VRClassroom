@@ -40,6 +40,7 @@ namespace VRClassroom
 
             // #Critical: The first we try to do is join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
             //PhotonNetwork.JoinRandomRoom();
+            PhotonNetwork.JoinOrCreateRoom("Class", new RoomOptions(), TypedLobby.Default);
         }
 
         public override void OnDisconnected(DisconnectCause cause)

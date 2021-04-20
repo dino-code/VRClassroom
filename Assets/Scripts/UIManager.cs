@@ -95,7 +95,10 @@ public class UIManager : MonoBehaviour
 
         // Need to call a function here that verifies whether the input is valid.
         // Check against database to see whether these credentials have been used before. If they have, show an error.
-        // Check to see that all the fields are filled. If they are not, show an error.        
+        // Check to see that all the fields are filled. If they are not, show an error.
+        // 
+        // 1 is the index of the "Lobby" scene.
+        SceneManager.LoadScene(1);
     }
     #endregion
 
