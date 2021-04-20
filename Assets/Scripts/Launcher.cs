@@ -39,7 +39,7 @@ namespace VRClassroom
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster was called by PUN");
 
             // #Critical: The first we try to do is join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-            PhotonNetwork.JoinRandomRoom();
+            //PhotonNetwork.JoinRandomRoom();
         }
 
         public override void OnDisconnected(DisconnectCause cause)
