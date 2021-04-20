@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -29,15 +26,6 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Screen Assignments
-        //startScreen = GameObject.Find("welcome_screen");
-        //createAccountScreen = GameObject.Find("create_acc_screen");
-        //loginScreen = GameObject.Find("login_screen");
-
-        // Button Assignments
-        //createAccountSubmitButton = GameObject.Find("Create_Account_Submit_Button").gameObject.GetComponent<Button>();
-        //loginSubmitButton = GameObject.Find("Login_Submit_Button").gameObject.GetComponent<Button>();
-
         // Show/Hide screens at start
         startScreen.SetActive(true);
         createAccountScreen.SetActive(false);
@@ -85,7 +73,6 @@ public class UIManager : MonoBehaviour
 
     public void OnCreateAccountSubmitClick()
     {
-        bool validCreation = false;          // set to true on successful account creation.
         Debug.Log("Submit Clicked");
 
         Participant participant = new Participant();
@@ -98,10 +85,7 @@ public class UIManager : MonoBehaviour
 
         // Need to call a function here that verifies whether the input is valid.
         // Check against database to see whether these credentials have been used before. If they have, show an error.
-        // Check to see that all the fields are filled. If they are not, show an error.
-
-        // If the account created is valid, we connect to Photon's servers.
-        
+        // Check to see that all the fields are filled. If they are not, show an error.        
     }
     #endregion
 

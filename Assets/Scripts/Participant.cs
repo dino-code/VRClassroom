@@ -7,7 +7,6 @@
         private string email;
         private string status;
         private string password;
-        private DatabaseManager dbManager = new DatabaseManager();
 
         public Participant(string firstName = "default", string lastName = "default", string email = "default", string password = "default", string status = "default")
         {
