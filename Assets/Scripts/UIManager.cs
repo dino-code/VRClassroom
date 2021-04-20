@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -37,12 +38,14 @@ public class UIManager : MonoBehaviour
     #region ShowScreens
     public void ShowCreateAccountScreen()
     {
+        // Hides other screens and shows Create Account screen
         startScreen.SetActive(false);
         createAccountScreen.SetActive(true);
     }
 
     public void ShowLoginScreen()
     {
+        // Hides other screens and shows login screen
         startScreen.SetActive(false);
         createAccountScreen.SetActive(false);
         loginScreen.SetActive(true);
@@ -52,6 +55,7 @@ public class UIManager : MonoBehaviour
     #region ButtonClicks
     public void OnLoginSubmitClick()
     {
+        // This function is called when the login button is clicked. 
         // First we grab all the login inputs
         string email;
         string password;
@@ -69,6 +73,12 @@ public class UIManager : MonoBehaviour
                 password = loginInputs[i].GetComponent<TMP_InputField>().text;
             }
         }
+
+        // Check against the database -- if inputs are accepted (validation function returns a bool), then we load the launcher scene.
+
+        // 1 is the index of the "Lobby" scene.
+        SceneManager.LoadScene(1);
+        
     }
 
     public void OnCreateAccountSubmitClick()
