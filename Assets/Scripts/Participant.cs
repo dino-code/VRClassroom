@@ -52,6 +52,7 @@
             /*
             if (this.InputsValid())
             {
+            DatabaseManager db = new DatabaseManager();
                 
 
                 // the database manager shoud be used to check if there is a participant in the database.
@@ -68,8 +69,11 @@
                     return false;
                 }
             }
+
+            else prompt to fix errors
+
             */
-            
+
 
             return true;
         }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-using RestSharp;
+using RestSharp;        // Used for requests
 
 namespace VRClassroom
 {

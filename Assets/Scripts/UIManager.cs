@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using TMPro;
+using UnityEngine.UI;               // Allows manipulation of Unity UI GameObjects
+using TMPro;                        // TextMeshPro package -- manipulation of text in Unity object
 
-using VRClassroom;
+using VRClassroom;                  // namespace of the custom functions coded for this project
 
 public class UIManager : MonoBehaviour
 {
@@ -75,6 +75,8 @@ public class UIManager : MonoBehaviour
         }
 
         // Check against the database -- if inputs are accepted (validation function returns a bool), then we load the launcher scene.
+        // create a participant object and the query the database to validate.
+
 
         // 1 is the index of the "Lobby" scene.
         SceneManager.LoadScene(1);
@@ -93,10 +95,12 @@ public class UIManager : MonoBehaviour
 
         participant.CreateUserAccount();
 
-        // Need to call a function here that verifies whether the input is valid.
+        ///<summary>
+        ///Need to call a function here that verifies whether the input is valid.
         // Check against database to see whether these credentials have been used before. If they have, show an error.
         // Check to see that all the fields are filled. If they are not, show an error.
-        // 
+        /// </summary>
+
         // 1 is the index of the "Lobby" scene.
         SceneManager.LoadScene(1);
     }
@@ -109,6 +113,7 @@ public class UIManager : MonoBehaviour
     }
     private Participant CreateParticipantFromInputFields(Participant participant, GameObject[] fields)
     {
+        // This function grabs the user input data from the Unity form GameObject and fills a participant object with the data.
         for (int i = 0; i < fields.Length; i++)
         {
             Debug.Log(fields[i].gameObject.name);
