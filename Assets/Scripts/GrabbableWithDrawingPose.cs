@@ -12,7 +12,7 @@ public class GrabbableWithDrawingPose : OVRGrabbable
     {
         base.GrabBegin(hand, grabPoint);
 
-        Transform pos = grabbedBy.transform;
+        
 
         if (grabbedBy.m_controller == OVRInput.Controller.RTouch)
         {

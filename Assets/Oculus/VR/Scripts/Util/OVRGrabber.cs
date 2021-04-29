@@ -272,12 +272,29 @@ public class OVRGrabber : MonoBehaviour
             // Set up offsets for grabbed object desired position relative to hand.
             if(m_grabbedObj.snapPosition)
             {
-                m_grabbedObjectPosOff = m_gripTransform.localPosition;
-                if(m_grabbedObj.snapOffset)
+                Debug.Log("Snap Position");
+                Debug.Log(m_grabbedObj.snapPosition);
+
+                //m_grabbedObjectPosOff = m_gripTransform.localPosition;
+                Debug.Log("m_gripTransform.localPosition");
+                Debug.Log(m_gripTransform.localPosition);
+
+                m_grabbedObjectPosOff = new Vector3(0.0f, 0.0f, 0.0f);
+                if (m_grabbedObj.snapOffset)
                 {
                     Vector3 snapOffset = m_grabbedObj.snapOffset.position;
                     if (m_controller == OVRInput.Controller.LTouch) snapOffset.x = -snapOffset.x;
+                    Debug.Log("Offset");
+                    Debug.Log(snapOffset);
+
+                    Debug.Log("old pos");
+                    Debug.Log(m_grabbedObjectPosOff); 
+
+
                     m_grabbedObjectPosOff += snapOffset;
+
+                    Debug.Log("New Pos");
+                    Debug.Log(m_grabbedObjectPosOff);
                 }
             }
             else
@@ -289,7 +306,13 @@ public class OVRGrabber : MonoBehaviour
 
             if (m_grabbedObj.snapOrientation)
             {
-                m_grabbedObjectRotOff = m_gripTransform.localRotation;
+                ///<summary>
+                ///This is the original code. It has been commented out because it messes with the offset.
+                ///Instead, it has been replaced with a new Quaternion.
+                ///</summary>
+                //m_grabbedObjectRotOff = m_gripTransform.localRotation;
+
+                m_grabbedObjectRotOff = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f).normalized;
                 if(m_grabbedObj.snapOffset)
                 {
                     m_grabbedObjectRotOff = m_grabbedObj.snapOffset.rotation * m_grabbedObjectRotOff;
