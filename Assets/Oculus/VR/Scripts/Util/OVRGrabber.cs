@@ -258,6 +258,11 @@ public class OVRGrabber : MonoBehaviour
 
         if (closestGrabbable != null)
         {
+            // Working on haptics for grab 
+            /*
+            if (m_controller == OVRInput.Controller.LTouch) OVRInput.SetControllerVibration(0.1f, 0.1f, OVRInput.Controller.LTouch);
+            else OVRInput.SetControllerVibration(0.1f, 0.1f, OVRInput.Controller.RTouch);
+            */
             if (closestGrabbable.isGrabbed)
             {
                 closestGrabbable.grabbedBy.OffhandGrabbed(closestGrabbable);
