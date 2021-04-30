@@ -9,6 +9,8 @@ TagManager:
   - create_acc_screen
   - login_screen
   - welcome_screen
+  - writing_surface
+  - writing_utensil
   layers:
   - Default
   - TransparentFX

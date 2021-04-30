@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8183703425257455415}
   - component: {fileID: 1141996770759318321}
   - component: {fileID: 7243394511958840372}
+  - component: {fileID: 1525551515}
   m_Layer: 0
   m_Name: Chalk
   m_TagString: Untagged
@@ -50,7 +51,8 @@ MonoBehaviour:
   m_allowOffhandGrab: 1
   m_snapPosition: 1
   m_snapOrientation: 1
-  m_snapOffset: {fileID: 0}
+  m_snapOffset: {fileID: 6972420448194859657, guid: e5ade68545781734298cdb9b4e926af0,
+    type: 3}
   m_grabPoints: []
 --- !u!65 &1141996770759318321
 BoxCollider:
@@ -81,6 +83,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1525551515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724487469895221796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352af1c7d299ae3469e224018a063dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5724487470407042189
 GameObject:
   m_ObjectHideFlags: 0

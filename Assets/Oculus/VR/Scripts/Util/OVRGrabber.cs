@@ -277,29 +277,15 @@ public class OVRGrabber : MonoBehaviour
             // Set up offsets for grabbed object desired position relative to hand.
             if(m_grabbedObj.snapPosition)
             {
-                Debug.Log("Snap Position");
-                Debug.Log(m_grabbedObj.snapPosition);
-
                 //m_grabbedObjectPosOff = m_gripTransform.localPosition;
-                Debug.Log("m_gripTransform.localPosition");
-                Debug.Log(m_gripTransform.localPosition);
 
                 m_grabbedObjectPosOff = new Vector3(0.0f, 0.0f, 0.0f);
                 if (m_grabbedObj.snapOffset)
                 {
                     Vector3 snapOffset = m_grabbedObj.snapOffset.position;
                     if (m_controller == OVRInput.Controller.LTouch) snapOffset.x = -snapOffset.x;
-                    Debug.Log("Offset");
-                    Debug.Log(snapOffset);
-
-                    Debug.Log("old pos");
-                    Debug.Log(m_grabbedObjectPosOff); 
-
 
                     m_grabbedObjectPosOff += snapOffset;
-
-                    Debug.Log("New Pos");
-                    Debug.Log(m_grabbedObjectPosOff);
                 }
             }
             else
