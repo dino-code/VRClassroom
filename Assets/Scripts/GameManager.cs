@@ -8,6 +8,33 @@ namespace VRClassroom
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {
+        [SerializeField]
+        public GameObject playerPrefab;
+
+        public void Start()
+        {
+            if (!PhotonNetwork.IsConnected)
+            {
+                SceneManager.LoadScene("Login");
+
+                return;
+            }
+
+            if (playerPrefab == null)
+            { // #Tip Never assume public properties of Components are filled up properly, always check and inform the developer of it.
+
+                Debug.LogError("<Color=Red><b>Missing</b></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
+            }
+            else
+            {
+                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+
+                // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+                Debug.Log("SPAWN WORKS");
+                PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(4.27f, 1.48f, -2.27f), Quaternion.identity, 0);
+            }
+        }
+
         #region Photon Callbacks
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -63,8 +90,9 @@ namespace VRClassroom
                 Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
             }
 
+            
             Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
+            PhotonNetwork.LoadLevel("Room");
         }
 
         #endregion
