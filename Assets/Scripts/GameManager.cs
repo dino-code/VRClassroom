@@ -31,7 +31,9 @@ namespace VRClassroom
 
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 Debug.Log("SPAWN WORKS");
-                PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(4.27f, 1.48f, -2.27f), Quaternion.identity, 0);
+
+                if (photonView.IsMine)
+                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(4.27f, 1.48f, -2.27f), Quaternion.identity, 0);
             }
         }
 
