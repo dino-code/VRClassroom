@@ -9,11 +9,9 @@ namespace VRClassroom
     public class GameManager : MonoBehaviourPunCallbacks
     {
         [SerializeField]
-        public GameObject playerPrefab;
+        private GameObject playerPrefab;
 
-        private GameObject localPlayer;
 
-        
 
         public static GameManager Instance;
 
@@ -37,23 +35,29 @@ namespace VRClassroom
             {
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
 
+
+
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                //PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(4.27f, 1.48f, -2.27f), Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(4.27f, 1.48f, -2.27f), Quaternion.identity, 0);
                 
+
+                /*
                 if (photonView.IsMine)
                 {
                     Debug.Log("SPAWN WORKS");
-                    localPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(4.27f, 1.48f, -2.27f), Quaternion.identity, 0);
-
+                    //localPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(4.27f, 1.48f, -2.27f), Quaternion.identity, 0);
+                    localPlayer = PhotonNetwork.Instantiate(this.localPlayerPrefab.name, new Vector3(4.27f, 1.48f, -2.27f), Quaternion.identity, 0);                    
                     
                     //Transform camera = localPlayer.transform.Find("Camera");
                     //camera.gameObject.SetActive(true);
                 } else
                 {
+                    //globalPlayer = PhotonNetwork.Instantiate(this.globalPlayerPrefab.name, new Vector3(4.27f, 1.48f, -2.27f), Quaternion.identity, 0);
                     //playerPrefab.gameObject.GetComponentInChildren<OVRManager>().gameObject.SetActive(false);
                     //playerPrefab.GetComponent<OVRCameraRig>().enabled = false;
                 }
-                    
+                */
+                
             }
         }
 
@@ -89,6 +93,7 @@ namespace VRClassroom
         /// </summary>
         public override void OnLeftRoom()
         {
+            PhotonNetwork.Destroy(playerPrefab);
             SceneManager.LoadScene(0);
         }
 
